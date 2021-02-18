@@ -5,12 +5,12 @@ export class CanvasLocal {
         this.rHeight = 10;
         this.maxX = canvas.width - 1;
         this.maxY = canvas.height - 1;
-        this.pixelSize = Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
+        this.pixelSize = Math.min(this.maxX, this.maxY); //Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
         this.centerX = this.maxX / 2;
         this.centerY = this.maxY / 2;
     }
-    iX(x) { return Math.round(this.centerX + x / this.pixelSize); }
-    iY(y) { return Math.round(this.centerY - y / this.pixelSize); }
+    iX(x) { return Math.round(this.centerX + x); }
+    iY(y) { return Math.round(this.centerY - y); }
     paint() {
         this.graphics.arc(this.iX(0), this.iY(0), Math.abs(this.iX(4) - this.iX(0)), 0, 2 * Math.PI, false);
         this.graphics.stroke();
