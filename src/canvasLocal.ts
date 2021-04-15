@@ -1,4 +1,3 @@
-
 export class CanvasLocal {
   //atributos
   protected graphics: CanvasRenderingContext2D;
