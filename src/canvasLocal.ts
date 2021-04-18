@@ -13,16 +13,16 @@ export class CanvasLocal {
       
   public constructor(g: CanvasRenderingContext2D, canvas: HTMLCanvasElement){
     this.graphics = g;
-    this. rWidth = 10;
-    this.rHeight= 10;
+    this.rWidth = 5;
+    this.rHeight= 3;
     this.maxX = canvas.width - 1
     this.maxY = canvas.height - 1;
     this.pixelSize = Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
-    this.centerX = this.maxX / 2;
-    this.centerY = this.maxY / 2;
+    this.centerX = this.maxX * 0.1;
+    this.centerY = this.maxY * 0.9;
   }
 
-  iX( x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
+  iX(x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
   iY(y: number): number{ return Math.round(this.centerY - y / this.pixelSize); }
   drawLine(x1: number, y1: number, x2: number, y2:number) {
     this.graphics.beginPath();
@@ -33,14 +33,19 @@ export class CanvasLocal {
   }
 
   paint() {
-    //this.graphics.arc(this.iX(0), this.iY(0), Math.abs(this.iX(4)-this.iX(0)), 0,2*Math.PI, false);
-    //this.graphics.stroke();
-    //this.graphics.fillText("Lienzo listo desde ts", this.iX(2), this.iY(3.7));
-    //debugger;
+    
+    this.drawLine(this.iX(-2.5), this.iY(0), this.iX(2.5), this.iY(0));
+    this.drawLine(this.iX(0), this.iY(1.5), this.iX(0), this.iY(-1.5));
+    /*this.graphics.strokeStyle = 'red';
+    this.drawLine(this.iX(0), this.iY(0), this.iX(2), this.iY(0));
+    this.drawLine(this.iX(2), this.iY(0), this.iX(1), this.iY(1.5));
+    this.drawLine(this.iX(1), this.iY(1.5), this.iX(0), this.iY(0));*/
+
+
     //this.drawLine(320, 40, 480, 400);
     //this.drawLine(320, 40, 140, 400);
     //this.drawLine(140, 400, 480, 400);
-    let lado = 100;
+    let lado = 1;
     let side = 0.95 * lado;
     let sideHalf = 0.5 * side;
     let xCenter = 320;
@@ -60,16 +65,16 @@ export class CanvasLocal {
 
     for (let m = 0; m < 4; m++){
       for (let n = 0; n < 4; n++){
-        xA = 100+n*lado - sideHalf;
-        yA = 100+m*lado - 0.5 * h;
-        xB = 100+n*lado+ sideHalf;
+        xA = 1+n*lado - sideHalf;
+        yA = 1+m*lado - 0.5 * h;
+        xB = 1+n*lado+ sideHalf;
         yB = yA;
-        xC = 100+n*lado;
-        yC = 100+m*lado + 0.5 * h; 
+        xC = 1+n*lado;
+        yC = 1+m*lado + 0.5 * h; 
         for (let i = 0; i < 20; i++){
-          this.drawLine(xA, yA, xB, yB);
-          this.drawLine(xB, yB, xC, yC);
-          this.drawLine(xC, yC, xA, yA);
+          this.drawLine(this.iX(xA), this.iY(yA), this.iX(xB), this.iY(yB));
+          this.drawLine(this.iX(xB), this.iY(yB), this.iX(xC), this.iY(yC));
+          this.drawLine(this.iX(xC), this.iY(yC), this.iX(xA), this.iY(yA));
           xA1 = p * xA + q * xB;
           yA1 = p * yA + q * yB;
           xB1 = p * xB + q * xC;
