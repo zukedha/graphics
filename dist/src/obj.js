@@ -1,8 +1,8 @@
 import { Point2D } from './point2D.js';
 import { Point3D } from './point3D.js';
 // Contains 3D object data
-export class Obj {
-    constructor() {
+var Obj = /** @class */ (function () {
+    function Obj() {
         this.theta = 0.3;
         this.phi = 1.3;
         //w = new Point3D[8];
@@ -23,8 +23,8 @@ export class Obj {
         // = distance between two opposite vertices.
         this.rho = 5 * this.objSize; // For reasonable perspective effect
     }
-    initPersp() {
-        let costh = Math.cos(this.theta), sinth = Math.sin(this.theta), cosph = Math.cos(this.phi), sinph = Math.sin(this.phi);
+    Obj.prototype.initPersp = function () {
+        var costh = Math.cos(this.theta), sinth = Math.sin(this.theta), cosph = Math.cos(this.phi), sinph = Math.sin(this.phi);
         this.v11 = -sinth;
         this.v12 = -cosph * costh;
         this.v13 = sinph * costh;
@@ -34,13 +34,15 @@ export class Obj {
         this.v32 = sinph;
         this.v33 = cosph;
         this.v43 = -this.rho;
-    }
-    eyeAndScreen() {
+    };
+    Obj.prototype.eyeAndScreen = function () {
         this.initPersp();
-        for (let i = 0; i < 8; i++) {
-            let p = this.w[i];
-            let x = this.v11 * p.x + this.v21 * p.y, y = this.v12 * p.x + this.v22 * p.y + this.v32 * p.z, z = this.v13 * p.x + this.v23 * p.y + this.v33 * p.z + this.v43;
+        for (var i = 0; i < 8; i++) {
+            var p = this.w[i];
+            var x = this.v11 * p.x + this.v21 * p.y, y = this.v12 * p.x + this.v22 * p.y + this.v32 * p.z, z = this.v13 * p.x + this.v23 * p.y + this.v33 * p.z + this.v43;
             this.vScr[i] = new Point2D(-this.d * x / z, -this.d * y / z);
         }
-    }
-}
+    };
+    return Obj;
+}());
+export { Obj };

@@ -1,19 +1,34 @@
-import { CanvasLocal } from './canvasLocal.js';
-import { Obj } from './obj.js';
-export class CvCubePersp extends CanvasLocal {
-    constructor(g, canvas) {
-        super(g, canvas);
-        this.obj = new Obj();
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+import { CanvasLocal } from "./canvasLocal.js";
+import { Obj } from "./obj.js";
+var CvCubePersp = /** @class */ (function (_super) {
+    __extends(CvCubePersp, _super);
+    function CvCubePersp(g, canvas) {
+        var _this = _super.call(this, g, canvas) || this;
+        _this.obj = new Obj();
+        return _this;
     }
-    line(i, j) {
-        let p = this.obj.vScr[i], q = this.obj.vScr[j];
+    CvCubePersp.prototype.line = function (i, j) {
+        var p = this.obj.vScr[i], q = this.obj.vScr[j];
         this.graphics.beginPath();
-        this.graphics.moveTo(super.iX(p.x), super.iY(p.y));
-        this.graphics.lineTo(super.iX(q.x), super.iY(q.y));
+        this.graphics.moveTo(_super.prototype.iX.call(this, p.x), _super.prototype.iY.call(this, p.y));
+        this.graphics.lineTo(_super.prototype.iX.call(this, q.x), _super.prototype.iY.call(this, q.y));
         this.graphics.closePath();
         this.graphics.stroke();
-    }
-    paint() {
+    };
+    CvCubePersp.prototype.paint = function () {
         //Dimension dim = getSize();
         //int maxX = dim.width - 1, maxY = dim.height - 1,
         //let     minMaxXY = Math.min(maxX, maxY);
@@ -35,5 +50,7 @@ export class CvCubePersp extends CanvasLocal {
         this.line(1, 5);
         this.line(2, 6);
         this.line(3, 7);
-    }
-}
+    };
+    return CvCubePersp;
+}(CanvasLocal));
+export { CvCubePersp };

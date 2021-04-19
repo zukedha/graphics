@@ -1,6 +1,6 @@
-import { CanvasLocal } from './canvasLocal.js'; 
-import { Point2D } from './point2D.js';
-import { Obj } from './obj.js'; 
+import { CanvasLocal } from "./canvasLocal.js"; 
+import { Point2D } from "./point2D.js";
+import { Obj } from "./obj.js"; 
 
 export class CvCubePersp extends CanvasLocal{
     //centerX: number; centerY:number;
