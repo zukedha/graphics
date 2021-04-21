@@ -23,7 +23,7 @@ export class CanvasLocal {
   }
 
   iX(x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
-  iY(y: number): number{ return Math.round(this.centerY - y / this.pixelSize); }
+  iY(y: number):number{return Math.round(this.centerY - y / this.pixelSize); }
   drawLine(x1: number, y1: number, x2: number, y2:number) {
     this.graphics.beginPath();
     this.graphics.moveTo(x1, y1);
