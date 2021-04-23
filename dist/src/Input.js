@@ -9,7 +9,7 @@ var Input = /** @class */ (function () {
         var ch;
         try {
             ch = this.pbis.charAt(this.index++);
-            if (this.index >= this.pbis.length) {
+            if (this.index > this.pbis.length) {
                 this.eoFile = true;
                 this.ok = false;
             }
@@ -20,7 +20,13 @@ var Input = /** @class */ (function () {
         return ch;
     };
     Input.prototype.isWhiteSpace = function (ch) {
-        return (ch === ' ');
+        return (ch == ' ');
+    };
+    Input.prototype.isEmpty = function (ch) {
+        return (ch.trim() == "");
+    };
+    Input.prototype.isEnter = function (ch) {
+        return (ch == '\n');
     };
     Input.prototype.isDigit = function (ch) {
         return (ch >= '0' && ch <= '9');
@@ -33,7 +39,7 @@ var Input = /** @class */ (function () {
         var ch;
         do {
             ch = this.readChar();
-        } while (this.isWhiteSpace(ch));
+        } while (this.isWhiteSpace(ch) || this.isEnter(ch));
         if (ch === '-') {
             neg = true;
             ch = this.readChar();

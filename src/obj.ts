@@ -1,5 +1,5 @@
-import { Point2D } from './point2D.js';
-import { Point3D } from './point3D.js';
+import { Point2D } from './Point2D.js';
+import { Point3D } from './Point3D.js';
 
 // Contains 3D object data
 export class Obj {

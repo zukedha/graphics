@@ -1,9 +1,12 @@
 // Obj3D.java: A 3D object and its 2D representation.
 // Uses: Point2D (Section 1.5), Point3D (Section 3.9),
 //       Polygon3D, Input (Section 5.5).
-import { Point2D } from './point2d.js';
-import { Point3D } from './point3d.js';
+import { Point2D } from './Point2D.js';
+import { Point3D } from './Point3D.js';
 import { Input } from './Input.js';
+import { Polygon3D } from './Polygon3D.js';
+import { Dimension } from './Dimension.js';
+import { CvWireframe } from './CvWireFrame';
 
 export class Obj3D
 {
@@ -15,166 +18,171 @@ export class Obj3D
   private sunZ: number = 1 / Math.sqrt(3); sunY: number = this.sunZ; sunX: number = -this.sunZ;
   inprodMin: number = 1e30; inprodMax: number = -1e30; inprodRange: number;
   private w:any[] = new Array();         // World coordinates
-  private e:Point3D[];                     // Eye coordinates
-  private vScr:Point2D[];                  // Screen coordinates
+  private e:Array<Point3D>;                     // Eye coordinates
+  private vScr: Array<Point2D>;//Point2D[];                  // Screen coordinates
   private polyList:any[] = new Array();  // Polygon3D objects 
   private file:string = " ";              // File name
 
-  read(file:string ): boolean {
+  read(file:any ): boolean {
     let inp:Input  = new Input(file);
     if (inp.fails())
       return this.failing();
     this.file = file;
     this.xMin = this.yMin = this.zMin = +1e30;
     this.xMax = this.yMax = this.zMax = -1e30;
-    return readObject(inp); // Read from inp into obj
+    return this.readObject(inp); // Read from inp into obj
   }
 
-   Vector getPolyList(){return polyList;}
-   String getFName(){return fName;}
-   Point3D[] getE(){return e;}
-   Point2D[] getVScr(){return vScr;}
-   Point2D getImgCenter(){return imgCenter;}
-   float getRho(){return rho;}
-   float getD(){return d;}
+   getPolyList():any{return this.polyList;}
+   getFName():string {return this.file;}
+   getE():Point3D[] {return this.e;}
+   getVScr():Point2D[] {return this.vScr;}
+   getImgCenter():Point2D {return this.imgCenter;}
+   getRho():number{return this.rho;}
+   getD():number{return this.d;}
 
-  private failing(): boolean {
+  failing(): boolean {
     return false;
   }
 
-   private boolean readObject(Input inp)
-   {  for (;;)
-      {  int i = inp.readInt();
+   readObject(inp:Input ): boolean{
+      for (; ;){
+         let i = inp.readInt();
          if (inp.fails()){inp.clear(); break;}
-         if (i > 0)
-         {  System.out.println(
+         if (i < 0)
+         {  console.log(
                "Negative vertex number in first part of input file");
-            return failing();
+            return this.failing();
          }
-         w.ensureCapacity(i + 1);
-         float x = inp.readFloat(), y = inp.readFloat(),
-               z = inp.readFloat();
-         addVertex(i, x, y, z);
+        // debugger
+         //w.ensureCapacity(i + 1);
+         let x = inp.readFloat(); let y = inp.readFloat();
+         let z = inp.readFloat();
+         this.addVertex(i, x, y, z);
       }
-      shiftToOrigin(); // Origin in center of object.
-      char ch;
-      int count = 0;
-      do   // Skip the line "Faces:"
-      {  ch = inp.readChar(); count++; 
-      }  while (!inp.eof() && ch != '\n');
-      if (count < 6 || count > 8)
-      {  System.out.println("Invalid input file"); return failing();
+      this.shiftToOrigin(); // Origin in center of object.
+      let ch:string;
+      let count = 0;
+   
+      do{   // Skip the line "Faces:"
+         ch = inp.readChar(); count++;
+      } while (!inp.eof() && ch != '\n');
+      
+      if (count < 6 || count > 8){
+         console.log("Invalid input file"); return this.failing();
       }
-     //  Build polygon list:
-     for (;;)
-     {   Vector vnrs = new Vector();
-         for (;;)
-         {  int i = inp.readInt();
+      //  Build polygon list:
+      for (;;){
+         let vnrs:Array<number> = [];
+         for (; ;){
+            let i = inp.readInt();
             if (inp.fails()){inp.clear(); break;}
-            int absi = Math.abs(i);
-            if (i == 0 || absi >= w.size() ||
-               w.elementAt(absi) == null)
-            {  System.out.println("Invalid vertex number: " + absi +
-               " must be defined, nonzero and less than " + w.size());
-               return failing();
+            let absi = Math.abs(i);
+            if (i == 0 || absi >= this.w.length ||
+               this.w[absi] == null)
+            {  console.log("Invalid vertex number: " + absi +
+               " must be defined, nonzero and less than " + this.w.length);
+               return this.failing();
             }
-            vnrs.addElement(new Integer(i));
+            vnrs.push(i);
          }
          ch = inp.readChar();
          if (ch != '.' && ch != '#') break;
          // Ignore input lines with only one vertex number:
-         if (vnrs.size() >= 2)
-            polyList.addElement(new Polygon3D(vnrs));
+         if (vnrs.length >= 2)
+            this.polyList.push(new Polygon3D(vnrs));
       }
-      inp.close();
+      //inp.close();
+      //console.log(this.polyList)
       return true;
    }
 
-   private void addVertex(int i, float x, float y, float z)
-   {  if (x < xMin) xMin = x; if (x > xMax) xMax = x;
-      if (y < yMin) yMin = y; if (y > yMax) yMax = y;
-      if (z < zMin) zMin = z; if (z > zMax) zMax = z;
-      if (i >= w.size()) w.setSize(i + 1);
-      w.setElementAt(new Point3D(x, y, z), i);
+   addVertex(i: number, x: number, y: number, z: number): void{
+      if (x < this.xMin) this.xMin = x; if (x > this.xMax) this.xMax = x;
+      if (y < this.yMin) this.yMin = y; if (y > this.yMax) this.yMax = y;
+      if (z < this.zMin) this.zMin = z; if (z > this.zMax) this.zMax = z;
+      //if (i >= this.w.length) this.w.setSize(i + 1);
+      //this.w.push(new Point3D(x, y, z));
+      this.w[i] = new Point3D(x, y, z);
    }
 
-   private void shiftToOrigin()
-   {  float xwC = 0.5F * (xMin + xMax),
-            ywC = 0.5F * (yMin + yMax),
-            zwC = 0.5F * (zMin + zMax);
-      int n = w.size();
-      for (int i=1; i<n; i++) 
-            if (w.elementAt(i) != null)
-            {  ((Point3D)w.elementAt(i)).x -= xwC;
-               ((Point3D)w.elementAt(i)).y -= ywC;
-               ((Point3D)w.elementAt(i)).z -= zwC;
-            }
-         float dx = xMax - xMin, dy = yMax - yMin, dz = zMax - zMin;
-         rhoMin = 0.6F * (float) Math.sqrt(dx * dx + dy * dy + dz * dz);
-         rhoMax = 1000 * rhoMin;
-         rho = 3 * rhoMin;
-      }
-
-      private void initPersp()
-      {  float costh = (float)Math.cos(theta),
-               sinth = (float)Math.sin(theta),
-               cosph = (float)Math.cos(phi),
-               sinph = (float)Math.sin(phi);
-         v11 = -sinth; v12 = -cosph * costh; v13 = sinph * costh;
-         v21 = costh;  v22 = -cosph * sinth; v23 = sinph * sinth;
-                       v32 = sinph;          v33 = cosph;
-                                             v43 = -rho;
-      }
-
-      float eyeAndScreen(Dimension dim)
-         // Called in paint method of Canvas class
-      {  initPersp();
-         int n = w.size();
-         e = new Point3D[n];
-         vScr = new Point2D[n];
-         float xScrMin=1e30F, xScrMax=-1e30F,
-               yScrMin=1e30F, yScrMax=-1e30F;
-         for (int i=1; i<n; i++)
-         {  Point3D P = (Point3D)(w.elementAt(i));
-            if (P == null)
-         {  e[i] = null; vScr[i] = null;
+   shiftToOrigin() :void{
+      let xwC = 0.5 * (this.xMin + this.xMax);
+      let ywC = 0.5 * (this.yMin + this.yMax);
+      let zwC = 0.5 * (this.zMin + this.zMax);
+      let n = this.w.length;
+      for (let i = 1; i < n; i++){
+         if (this.w[i] != undefined) {
+            this.w[i].x -= xwC;
+            this.w[i].y -= ywC;
+            this.w[i].z -= zwC;
          }
-         else
-         {  float x = v11 * P.x + v21 * P.y;
-            float y = v12 * P.x + v22 * P.y + v32 * P.z;
-            float z = v13 * P.x + v23 * P.y + v33 * P.z + v43;
-            Point3D Pe = e[i] = new Point3D(x, y, z);
-            float xScr = -Pe.x/Pe.z, yScr = -Pe.y/Pe.z;
-            vScr[i] = new Point2D(xScr, yScr);
+      }
+      let dx = this.xMax - this.xMin, dy = this.yMax - this.yMin, dz = this.zMax - this.zMin;
+      this.rhoMin = 0.6 * Math.sqrt(dx * dx + dy * dy + dz * dz);
+      this.rhoMax = 1000 * this.rhoMin;
+      this.rho = 3 * this.rhoMin;
+   }
+
+   initPersp(): void {
+      let costh = Math.cos(this.theta);
+      let sinth = Math.sin(this.theta);
+      let cosph = Math.cos(this.phi);
+      let sinph = Math.sin(this.phi);
+         this.v11 = -sinth; this.v12 = -cosph * costh; this.v13 = sinph * costh;
+         this.v21 = costh;  this.v22 = -cosph * sinth; this.v23 = sinph * sinth;
+                            this.v32 = sinph;          this.v33 = cosph;
+                                                       this.v43 = -this.rho;
+   }
+
+   eyeAndScreen(dim: Dimension ): number{// Called in paint method of Canvas class
+      this.initPersp();
+      let n = this.w.length;
+      this.e = new Array(n);
+      this.vScr = new Array(n);
+      let xScrMin=1e30, xScrMax=-1e30,
+            yScrMin=1e30, yScrMax=-1e30;
+      for (let i = 1; i < n; i++) {
+         let P: Point3D = this.w[i];
+         if (P == undefined) {
+            this.e[i] = undefined; this.vScr[i] = null;
+         }
+         else {
+            let x = this.v11 * P.x + this.v21 * P.y;
+            let y = this.v12 * P.x + this.v22 * P.y + this.v32 * P.z;
+            let z = this.v13 * P.x + this.v23 * P.y + this.v33 * P.z + this.v43;
+            let Pe:Point3D = this.e[i] = new Point3D(x, y, z);
+            let xScr = -Pe.x/Pe.z, yScr = -Pe.y/Pe.z;
+            this.vScr[i] = new Point2D(xScr, yScr);
             if (xScr < xScrMin) xScrMin = xScr; 
             if (xScr > xScrMax) xScrMax = xScr;
             if (yScr < yScrMin) yScrMin = yScr;
             if (yScr > yScrMax) yScrMax = yScr;
          }
       }
-      float rangeX = xScrMax - xScrMin, rangeY = yScrMax - yScrMin;
-      d = 0.95F * Math.min(dim.width/rangeX, dim.height/rangeY);
-      imgCenter = new Point2D(d * (xScrMin + xScrMax)/2,
-                              d * (yScrMin + yScrMax)/2);
-      for (int i=1; i<n; i++)
-      {  if (vScr[i] != null){vScr[i].x *= d; vScr[i].y *= d;}
+      let rangeX = xScrMax - xScrMin, rangeY = yScrMax - yScrMin;
+      this.d = 0.95 * Math.min(dim.width/rangeX, dim.height/rangeY);
+      this.imgCenter = new Point2D(this.d * (xScrMin + xScrMax)/2,
+                              this.d * (yScrMin + yScrMax)/2);
+      for (let i = 1; i < n; i++) {
+         if (this.vScr[i] != null) { this.vScr[i].x *= this.d; this.vScr[i].y *= this.d; }
       }
-      return d * Math.max(rangeX, rangeY);
+      return this.d * Math.max(rangeX, rangeY);
       // Maximum screen-coordinate range used in CvHLines for HP-GL
    }
 
-   void planeCoeff()
-   {  int nFaces = polyList.size();
+   planeCoeff(): void {
+      let nFaces = this.polyList.length;
 
-      for (int j=0; j<nFaces; j++)
-      {  Polygon3D pol = (Polygon3D)(polyList.elementAt(j));
-         int[] nrs = pol.getNrs();
+      for (let j = 0; j < nFaces; j++){
+         let pol: Polygon3D  = this.polyList[j];
+         let nrs: number[] = pol.getNrs();
          if (nrs.length < 3) continue;
-         int iA = Math.abs(nrs[0]), // Possibly negative
+         let iA = Math.abs(nrs[0]), // Possibly negative
              iB = Math.abs(nrs[1]), // for HLines.
-             iC = Math.abs(nrs[2]);
-         Point3D A = e[iA], B = e[iB], C = e[iC];
-         double
+            iC = Math.abs(nrs[2]);
+         let A: Point3D  = this.e[iA], B: Point3D = this.e[iB], C: Point3D = this.e[iC];
+         let 
             u1 = B.x - A.x, u2 = B.y - A.y, u3 = B.z - A.z,
             v1 = C.x - A.x, v2 = C.y - A.y, v3 = C.z - A.z,
             a = u2 * v3 - u3 * v2,
@@ -184,31 +192,32 @@ export class Obj3D
             a /= len; b /= len; c /= len;
             h = a * A.x + b * A.y + c * A.z;
          pol.setAbch(a, b, c, h);
-         Point2D A1 = vScr[iA], B1 = vScr[iB], C1 = vScr[iC];
+         let A1: Point2D  = this.vScr[iA], B1 = this.vScr[iB], C1 = this.vScr[iC];
          u1 = B1.x - A1.x; u2 = B1.y - A1.y;
          v1 = C1.x - A1.x; v2 = C1.y - A1.y;
          if (u1 * v2 - u2 * v1 <= 0) continue; // backface
-         double inprod = a * sunX + b * sunY + c * sunZ;
-         if (inprod < inprodMin) inprodMin = inprod; 
-         if (inprod > inprodMax) inprodMax = inprod;
-       }
-       inprodRange = inprodMax - inprodMin;
-     }
+         let inprod: number = a * this.sunX + b * this.sunY + c * this.sunZ;
+         if (inprod < this.inprodMin) this.inprodMin = inprod; 
+         if (inprod > this.inprodMax) this.inprodMax = inprod;
+      }
+      this.inprodRange = this.inprodMax - this.inprodMin;
+   }
 
-     boolean vp(Canvas cv, float dTheta, float dPhi, float fRho)
-     {  theta += dTheta;
-        phi += dPhi;
-        float rhoNew = fRho * rho;
-        if (rhoNew >= rhoMin && rhoNew <= rhoMax)
-           rho = rhoNew;
-        else
-           return false;
-        cv.repaint();
-        return true;
-    }
-    int colorCode(double a, double b, double c)
-    {  double inprod = a * sunX + b * sunY + c * sunZ;
-       return (int)Math.round(
-          ((inprod - inprodMin)/inprodRange) * 255);
-    }
+   vp( cv: CvWireframe, dTheta:number, dPhi:number, fRho:number): boolean {
+      this.theta += dTheta;
+      this.phi += dPhi;
+      let rhoNew = fRho * this.rho;
+      if (rhoNew >= this.rhoMin && rhoNew <= this.rhoMax)
+         this.rho = rhoNew;
+      else
+         return false;
+      cv.paint();
+      return true;
+   }
+
+   colorCode(a: number, b: number, c: number): number{
+      let inprod = a * this.sunX + b * this.sunY + c * this.sunZ;
+      return Math.round(
+          ((inprod - this.inprodMin)/this.inprodRange) * 255);
+   }
 }

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation Starter Template</title>
+    <title>WireFrame 3D Vizualizer</title>
     <!-- Compressed CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
         rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
@@ -22,8 +22,18 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Abrir</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Vizualizar</a>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Vizualizar
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink1">
+                  <li><a class="dropdown-item" href="#" id="eyeDown">Viewpoint Down </a></li>
+                  <li><a class="dropdown-item" href="#" id="eyeUp">Viewpoint Up</a></li>
+                  <li><a class="dropdown-item" href="#" id="eyeLeft">Viewpoint to Left</a></li>
+                  <li><a class="dropdown-item" href="#" id="eyeRight">Viewpoint to Right</a></li>
+                  <li><a class="dropdown-item" href="#" id="incrDist">Increase viewing distancet</a></li>
+                  <li><a class="dropdown-item" href="#" id="decrDist">Decrease viewing distance</a></li>
+                </ul>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Expand</a>

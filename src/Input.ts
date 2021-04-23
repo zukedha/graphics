@@ -9,11 +9,11 @@ export class Input
     this.pbis = file;
   }
 
-  readChar(): string
-  {  let ch:string;
-    try
-    {   ch = this.pbis.charAt(this.index++);
-      if(this.index>=this.pbis.length) {
+  readChar(): string{
+    let ch: string;
+    try {
+      ch = this.pbis.charAt(this.index++);
+      if(this.index>this.pbis.length) {
         this.eoFile = true;
         this.ok = false;
       }
@@ -25,7 +25,13 @@ export class Input
   }
 
   isWhiteSpace(ch:string):boolean {
-    return (ch===' ');
+    return (ch==' ');
+  }
+  isEmpty(ch:string):boolean {
+    return (ch.trim()=="");
+  }
+  isEnter(ch:string):boolean {
+    return (ch=='\n');
   }
 
   isDigit(ch: string): boolean{
@@ -39,7 +45,7 @@ export class Input
     let ch:string;
     do {
       ch = this.readChar();
-    } while (this.isWhiteSpace(ch));
+    } while (this.isWhiteSpace(ch)||this.isEnter(ch));
     if (ch === '-') {
       neg = true;
       ch = this.readChar();
