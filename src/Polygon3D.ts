@@ -34,13 +34,13 @@ export class Polygon3D{
    // Successive vertex numbers (CCW) in vector nrs.
    // Resulting triangles will be put in array t.
     let n = this.nrs.length;          // n > 2 is required
-    let next: number[];// = new Array(n);
+    let next: number[] = new Array(n);
 
 
 
 //checar inicializacion del arreglo  USO DE NEW ARRAY O NO
 
-    this.t = new Tria[n - 2];
+    this.t = new Array(n - 2);
     let vScr: Point2D[] = obj.getVScr();
     let iA:number=0, iB:number, iC:number; let j:number=n-1;
     for (let i = 0; i < n; i++){

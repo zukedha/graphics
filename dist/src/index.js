@@ -1,5 +1,5 @@
 import { Obj3D } from './Obj3D.js';
-import { CvWireframe } from './CvWireFrame.js';
+import { CvHLines } from './CvHLines.js';
 var canvas;
 var graphics;
 canvas = document.getElementById('circlechart');
@@ -18,7 +18,7 @@ function leerArchivo(e) {
         obj = new Obj3D();
         if (obj.read(contenido)) {
             //sDir = sDir1;
-            cv = new CvWireframe(graphics, canvas);
+            cv = new CvHLines(graphics, canvas);
             cv.setObj(obj);
             cv.paint();
         }
@@ -30,18 +30,6 @@ function mostrarContenido(contenido) {
     //
     //readObject(new Input(contenido));
     elemento.innerHTML = contenido;
-}
-function readObject(inp) {
-    //for (; ;) {
-    var i = inp.readInt();
-    console.log(i);
-    i = inp.readInt();
-    console.log(i);
-    i = inp.readFloat();
-    console.log(i);
-    i = inp.readInt();
-    console.log(i);
-    //}
 }
 function vp(dTheta, dPhi, fRho) {
     if (obj != undefined) {

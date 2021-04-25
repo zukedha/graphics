@@ -1,8 +1,9 @@
-import { CvCubePersp } from './cvCubePersp.js';
+
 import { Input } from './Input.js';
 import { Obj3D } from './Obj3D.js';
 import { Canvas3D } from './Canvas3D.js';
 import { CvWireframe } from './CvWireFrame.js';
+import { CvHLines } from './CvHLines.js';
 
 let canvas: HTMLCanvasElement;
 let graphics: CanvasRenderingContext2D;
@@ -10,7 +11,7 @@ let graphics: CanvasRenderingContext2D;
 canvas = <HTMLCanvasElement>document.getElementById('circlechart');
 graphics = canvas.getContext('2d');
 
-let cv: CvWireframe;
+let cv: CvHLines;
 let obj: Obj3D;
 
 function leerArchivo(e) {
@@ -25,7 +26,7 @@ function leerArchivo(e) {
     obj = new Obj3D();
     if (obj.read(contenido)) {
       //sDir = sDir1;
-      cv = new CvWireframe(graphics, canvas);
+      cv = new CvHLines(graphics, canvas);
       cv.setObj(obj);
       cv.paint();
     }
@@ -38,19 +39,6 @@ function mostrarContenido(contenido:any) {
   //
   //readObject(new Input(contenido));
   elemento.innerHTML = contenido;
-}
-
-function readObject(inp: Input): void {
-  //for (; ;) {
-    let i = inp.readInt(); 
-  console.log(i);
-  i = inp.readInt(); 
-  console.log(i);
-  i = inp.readFloat(); 
-  console.log(i);
-  i = inp.readInt(); 
-    console.log(i);
-  //}
 }
 
 function vp(dTheta:number, dPhi:number, fRho:number):void{  // Viewpoint

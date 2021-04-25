@@ -27,9 +27,9 @@ var Polygon3D = /** @class */ (function () {
         // Successive vertex numbers (CCW) in vector nrs.
         // Resulting triangles will be put in array t.
         var n = this.nrs.length; // n > 2 is required
-        var next; // = new Array(n);
+        var next = new Array(n);
         //checar inicializacion del arreglo  USO DE NEW ARRAY O NO
-        this.t = new Tria[n - 2];
+        this.t = new Array(n - 2);
         var vScr = obj.getVScr();
         var iA = 0, iB, iC;
         var j = n - 1;

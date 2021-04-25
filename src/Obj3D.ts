@@ -6,7 +6,7 @@ import { Point3D } from './Point3D.js';
 import { Input } from './Input.js';
 import { Polygon3D } from './Polygon3D.js';
 import { Dimension } from './Dimension.js';
-import { CvWireframe } from './CvWireFrame';
+import { CvHLines } from './CvHLines';
 
 export class Obj3D
 {
@@ -203,7 +203,7 @@ export class Obj3D
       this.inprodRange = this.inprodMax - this.inprodMin;
    }
 
-   vp( cv: CvWireframe, dTheta:number, dPhi:number, fRho:number): boolean {
+   vp( cv: CvHLines, dTheta:number, dPhi:number, fRho:number): boolean {
       this.theta += dTheta;
       this.phi += dPhi;
       let rhoNew = fRho * this.rho;
