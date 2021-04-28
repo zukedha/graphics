@@ -1,8 +1,8 @@
 export class CanvasLocal {
     constructor(g, canvas) {
         this.graphics = g;
-        this.rWidth = 6;
-        this.rHeight = 4;
+        this.rWidth = 12;
+        this.rHeight = 8;
         this.maxX = canvas.width - 1;
         this.maxY = canvas.height - 1;
         this.pixelSize = Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
