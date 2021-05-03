@@ -162,7 +162,8 @@ var CvHLines = /** @class */ (function () {
           }*
        }
     }*/
-    CvHLines.prototype.drawLine = function (g, x1, y1, x2, y2) {
+    CvHLines.prototype.drawLine = function (g, px1, py1, px2, py2) {
+        var x1 = this.iX(px1), y1 = this.iY(py1), x2 = this.iX(px2), y2 = this.iY(py2);
         if (x1 != x2 || y1 != y2) {
             g.beginPath();
             g.moveTo(x1, y1);
@@ -170,6 +171,7 @@ var CvHLines = /** @class */ (function () {
             g.closePath();
             g.stroke();
         }
+        //console.log("coord:",pScr.x, pScr.y, qScr.x, qScr.y )
     };
     CvHLines.prototype.lineSegment = function (g, p, q, pScr, qScr, iP, iQ, iStart) {
         var u1 = qScr.x - pScr.x, u2 = qScr.y - pScr.y;

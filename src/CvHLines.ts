@@ -192,7 +192,8 @@ export class CvHLines{ // extends Canvas3D
        }
     }*/
   
-    drawLine(g: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number): void{
+  drawLine(g: CanvasRenderingContext2D, px1: number, py1: number, px2: number, py2: number): void{
+    let x1 = this.iX(px1), y1 = this.iY(py1), x2 = this.iX(px2), y2 = this.iY(py2);
       if (x1 != x2 || y1 != y2) {
         g.beginPath();
         g.moveTo(x1, y1);
@@ -200,6 +201,7 @@ export class CvHLines{ // extends Canvas3D
         g.closePath();
         g.stroke();
       }
+      //console.log("coord:",pScr.x, pScr.y, qScr.x, qScr.y )
     }
 
     lineSegment(g: CanvasRenderingContext2D,  p:Point3D, q:Point3D,
@@ -348,6 +350,7 @@ export class CvHLines{ // extends Canvas3D
                 // if no continue-statement has been executed
           }
           this.drawLine(g, pScr.x, pScr.y, qScr.x, qScr.y);
+          
              // No triangle obscures PQ.
     }
 }
