@@ -44,7 +44,7 @@ export class CvHLines{ // extends Canvas3D
     let dim: Dimension = new Dimension(this.canvas.width, this.canvas.height);
     this.canvas.width=this.canvas.width;
     this.maxX = dim.width - 1; this.maxY = dim.height - 1;
-    this.centerX = this.maxX/2+100; this.centerY = this.maxY/2-100;
+    this.centerX = this.maxX/2; this.centerY = this.maxY/2;
       // ze-axis towards eye, so ze-coordinates of
       // object points are all negative. Since screen
       // coordinates x and y are used to interpolate for
@@ -179,18 +179,6 @@ export class CvHLines{ // extends Canvas3D
       }
       return s;
   }
-    /*private String hpx(float x){return toString(x - imgCenter.x);}
-    private String hpy(float y){return toString(y - imgCenter.y);}*/
-
-    /*drawLine(g: CanvasRenderingContext2D, float x1, float y1, float x2, float y2):void
-    {  if (x1 != x2 || y1 != y2)
-       {  g.drawLine(iX(x1), iY(y1), iX(x2), iY(y2));
-          /*if (hpgl != null)
-          {  hpgl.write("PU;PA" + hpx(x1) + "," + hpy(y1));
-             hpgl.write("PD;PA" + hpx(x2) + "," + hpy(y2) + "\n");
-          }*
-       }
-    }*/
   
   drawLine(g: CanvasRenderingContext2D, px1: number, py1: number, px2: number, py2: number): void{
     let x1 = this.iX(px1), y1 = this.iY(py1), x2 = this.iX(px2), y2 = this.iY(py2);
