@@ -8,30 +8,31 @@ import { Polygon3D } from './Polygon3D.js';
 import { Dimension } from './Dimension.js';
 import { CvHLines } from './CvHLines';
 
-export class Obj3D
-{
-  rho: number; d: number; theta: number = 0.30; phi: number = 1.3; rhoMin: number; rhoMax: number;
-  xMin: number; xMax: number; yMin: number; yMax: number; zMin: number; zMax: number;
-  v11: number; v12: number; v13: number; v21: number; v22: number; v23: number; v32: number;
-  v33: number; v43: number; xe: number; ye: number; ze: number; objSize: number;
-  private imgCenter: Point2D;
-  private sunZ: number = 1 / Math.sqrt(3); sunY: number = this.sunZ; sunX: number = -this.sunZ;
-  inprodMin: number = 1e30; inprodMax: number = -1e30; inprodRange: number;
-  private w:any[] = new Array();         // World coordinates
-  private e:Array<Point3D>;                     // Eye coordinates
-  private vScr: Array<Point2D>;//Point2D[];                  // Screen coordinates
-  private polyList:any[] = new Array();  // Polygon3D objects 
-  private file:string = " ";              // File name
+export class Obj3D{
+   rho: number; d: number; theta: number = 0.30; phi: number = 1.3; rhoMin: number; rhoMax: number;
+   xMin: number; xMax: number; yMin: number; yMax: number; zMin: number; zMax: number;
+   v11: number; v12: number; v13: number; v21: number; v22: number; v23: number; v32: number;
+   v33: number; v43: number; xe: number; ye: number; ze: number; objSize: number;
+   private imgCenter: Point2D;
+   private sunZ: number = 1 / Math.sqrt(3); sunY: number = this.sunZ; sunX: number = -this.sunZ;
+   inprodMin: number = 1e30; inprodMax: number = -1e30; inprodRange: number;
+   public w:any[] = new Array();         // World coordinates
+   private e:Array<Point3D>;                     // Eye coordinates
+   private vScr: Array<Point2D>;//Point2D[];                  // Screen coordinates
+   private polyList:any[] = new Array();  // Polygon3D objects 
+   private file: string = " ";
+   public indices:Array<number> = [];
+	public tind:number=0;           // File name
 
-  read(file:any ): boolean {
-    let inp:Input  = new Input(file);
-    if (inp.fails())
-      return this.failing();
-    this.file = file;
-    this.xMin = this.yMin = this.zMin = +1e30;
-    this.xMax = this.yMax = this.zMax = -1e30;
-    return this.readObject(inp); // Read from inp into obj
-  }
+   read(file:any ): boolean {
+      let inp:Input  = new Input(file);
+      if (inp.fails())
+         return this.failing();
+      this.file = file;
+      this.xMin = this.yMin = this.zMin = +1e30;
+      this.xMax = this.yMax = this.zMax = -1e30;
+      return this.readObject(inp); // Read from inp into obj
+   }
 
    getPolyList():any{return this.polyList;}
    getFName():string {return this.file;}
@@ -41,11 +42,12 @@ export class Obj3D
    getRho():number{return this.rho;}
    getD():number{return this.d;}
 
-  failing(): boolean {
-    return false;
-  }
+   failing(): boolean {
+      return false;
+   }
 
-   readObject(inp:Input ): boolean{
+   readObject(inp: Input): boolean{
+      let j = 0;
       for (; ;){
          let i = inp.readInt();
          if (inp.fails()){inp.clear(); break;}
@@ -59,11 +61,13 @@ export class Obj3D
          let x = inp.readFloat(); let y = inp.readFloat();
          let z = inp.readFloat();
          this.addVertex(i, x, y, z);
+         this.indices[j++]=i;
       }
+      this.tind=j--;
       this.shiftToOrigin(); // Origin in center of object.
       let ch:string;
       let count = 0;
-   
+ 
       do{   // Skip the line "Faces:"
          ch = inp.readChar(); count++;
       } while (!inp.eof() && ch != '\n');
