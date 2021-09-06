@@ -39,8 +39,8 @@ export class CanvasLocal {
 
   paint() {
     
-    this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
-    this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
+    //this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
+    //this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
 
 
     //dibuja la cuadricula

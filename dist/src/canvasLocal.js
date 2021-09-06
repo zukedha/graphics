@@ -1,8 +1,8 @@
 export class CanvasLocal {
     constructor(g, canvas) {
         this.graphics = g;
-        this.rWidth = 12;
-        this.rHeight = 8;
+        this.rWidth = 6;
+        this.rHeight = 4;
         this.maxX = canvas.width - 1;
         this.maxY = canvas.height - 1;
         this.pixelSize = Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
@@ -22,8 +22,8 @@ export class CanvasLocal {
         return Math.sin(x * 2.5);
     }
     paint() {
-        this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
-        this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
+        //this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
+        //this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
         //dibuja la cuadricula
         this.graphics.strokeStyle = 'lightgray';
         for (let x = -3; x <= 3; x += 0.25) {
