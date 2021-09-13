@@ -22,8 +22,13 @@ export class CanvasLocal {
         return Math.sin(x * 2.5);
     }
     paint() {
+<<<<<<< HEAD
         //this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
         //this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
+=======
+        this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
+        this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
+>>>>>>> 458e2dd... graficador
         //dibuja la cuadricula
         this.graphics.strokeStyle = 'lightgray';
         for (let x = -3; x <= 3; x += 0.25) {
