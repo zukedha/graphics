@@ -22,8 +22,9 @@ export class CanvasLocal {
     this.centerY = this.maxY/2;
   }
 
-  iX(x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
-  iY(y: number):number{return Math.round(this.centerY - y / this.pixelSize); }
+  /*iX(x: number):number{return Math.round(this.centerX + x/this.pixelSize);}
+  iY(y: number): number{ return Math.round(this.centerY - y / this.pixelSize); }
+  */
   drawLine(x1: number, y1: number, x2: number, y2:number) {
     this.graphics.beginPath();
     this.graphics.moveTo(x1, y1);
@@ -32,13 +33,14 @@ export class CanvasLocal {
     this.graphics.stroke();
   }
 
-  fx(x:number):number {
+  /*fx(x:number):number {
     return Math.sin(x*2.5);
-  }
+  }*/
 
 
   paint() {
     
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     //this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
@@ -51,10 +53,18 @@ export class CanvasLocal {
     //this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
     //this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
 >>>>>>> 36fe953... CAmbios temporales hechos para la clase
+=======
+
+    this.drawLine(100.5,100, 500,100.5);
+    this.drawLine(500, 100, 300, 400);
+    this.drawLine(300, 400, 100,100);
+   /* this.drawLine(this.iX(-3), this.iY(0), this.iX(3), this.iY(0));
+    this.drawLine(this.iX(0), this.iY(2), this.iX(0), this.iY(-2));
+>>>>>>> c17a0a6... A partir de aqui se trabajo solo diseño de interface
 
 
     //dibuja la cuadricula
-    this.graphics.strokeStyle = 'lightgray';
+    /*this.graphics.strokeStyle = 'lightgray';
     for (let x = -3; x <= 3; x+=0.25){
       this.drawLine(this.iX(x), this.iY(-2), this.iX(x), this.iY(2));
     }
