@@ -67,7 +67,7 @@ export class CanvasLocal {
     }
     this.graphics.strokeText("X", this.iX(2.9), this.iY(0.2));
     this.graphics.strokeText("Y", this.iX(-0.2), this.iY(1.8));*/
-    this.graphics.strokeStyle = 'red';
+    
     let lado = 1;
     let side = 1.15 * lado;
     let sideHalf = 0.60 * side;
@@ -95,8 +95,11 @@ export class CanvasLocal {
         xC = 1+n*lado;
         yC = 1+m*lado + 1 * h; 
         for (let i = 0; i < 25; i++){
+          this.graphics.strokeStyle = 'red';
           this.drawLine(this.iX(xA), this.iY(yA), this.iX(xB), this.iY(yB));
+          this.graphics.strokeStyle = 'blue';
           this.drawLine(this.iX(xB), this.iY(yB), this.iX(xC), this.iY(yC));
+          this.graphics.strokeStyle = 'cyan';
           this.drawLine(this.iX(xC), this.iY(yC), this.iX(xA), this.iY(yA));
           xA1 = p * xA + q * xB;
           yA1 = p * yA + q * yB;
