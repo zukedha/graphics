@@ -13,8 +13,8 @@ export class CanvasLocal {
       
   public constructor(g: CanvasRenderingContext2D, canvas: HTMLCanvasElement){
     this.graphics = g;
-    this.rWidth = 6;
-    this.rHeight= 4;
+    this.rWidth = 12;
+    this.rHeight= 10;
     this.maxX = canvas.width - 1
     this.maxY = canvas.height - 1;
     this.pixelSize = Math.max(this.rWidth / this.maxX, this.rHeight / this.maxY);
@@ -32,9 +32,9 @@ export class CanvasLocal {
     this.graphics.stroke();
   }
 
-  fx(x:number):number {
+  /*fx(x:number):number {
     return Math.sin(x*2.5);
-  }
+  }*/
 
 
   paint(){
