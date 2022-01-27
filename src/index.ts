@@ -116,6 +116,13 @@ function pza12MoveFunc(){
   }
   cv.setObj(obj);
   cv.paint();
+
+  var tr2 = -0.2;
+  for(var i=40;i<=63; i++){
+    obj.w[i].x= obj.w[i].x+tr2;
+  }
+  cv.setObj(obj);
+  cv.paint();
 }
 
 function pza12MoveRetunFunc(){
@@ -141,6 +148,13 @@ function pza12MoveRetunFunc(){
   var tr = 0.2;
   for(var i=13;i<=20; i++){
     obj.w[i].x= obj.w[i].x+tr;
+  }
+  cv.setObj(obj);
+  cv.paint();
+
+  var tr2 = 0.2;
+  for(var i=40;i<=63; i++){
+    obj.w[i].x= obj.w[i].x+tr2;
   }
   cv.setObj(obj);
   cv.paint();
