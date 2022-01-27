@@ -1,8 +1,8 @@
 // Obj3D.java: A 3D object and its 2D representation.
 // Uses: Point2D (Section 1.5), Point3D (Section 3.9),
 //       Polygon3D, Input (Section 5.5).
-import { Point2D } from './Point2D.js';
-import { Point3D } from './Point3D.js';
+import { Point2D } from './point2D.js';
+import { Point3D } from './point3D.js';
 import { Input } from './Input.js';
 import { Polygon3D } from './Polygon3D.js';
 import { Dimension } from './Dimension.js';

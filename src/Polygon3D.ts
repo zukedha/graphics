@@ -2,7 +2,7 @@
 //                 referring to coordinates stored in an Obj3D object.
 import { Tria } from './Tria.js';
 import { Obj3D } from './Obj3D.js';
-import { Point2D } from './Point2D.js';
+import { Point2D } from './point2D.js';
 import { Tools2D } from './Tools2D.js';
 
 export class Polygon3D{

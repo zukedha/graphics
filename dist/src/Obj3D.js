@@ -1,8 +1,8 @@
 // Obj3D.java: A 3D object and its 2D representation.
 // Uses: Point2D (Section 1.5), Point3D (Section 3.9),
 //       Polygon3D, Input (Section 5.5).
-import { Point2D } from './Point2D.js';
-import { Point3D } from './Point3D.js';
+import { Point2D } from './point2D.js';
+import { Point3D } from './point3D.js';
 import { Input } from './Input.js';
 import { Polygon3D } from './Polygon3D.js';
 var Obj3D = /** @class */ (function () {
@@ -16,7 +16,9 @@ var Obj3D = /** @class */ (function () {
         this.inprodMax = -1e30;
         this.w = new Array(); // World coordinates
         this.polyList = new Array(); // Polygon3D objects 
-        this.file = " "; // File name
+        this.file = " ";
+        this.indices = [];
+        this.tind = 0; // File name
     }
     Obj3D.prototype.read = function (file) {
         var inp = new Input(file);
@@ -38,6 +40,7 @@ var Obj3D = /** @class */ (function () {
         return false;
     };
     Obj3D.prototype.readObject = function (inp) {
+        var j = 0;
         for (;;) {
             var i = inp.readInt();
             if (inp.fails()) {
@@ -54,7 +57,9 @@ var Obj3D = /** @class */ (function () {
             var y = inp.readFloat();
             var z = inp.readFloat();
             this.addVertex(i, x, y, z);
+            this.indices[j++] = i;
         }
+        this.tind = j--;
         this.shiftToOrigin(); // Origin in center of object.
         var ch;
         var count = 0;

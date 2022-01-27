@@ -1,4 +1,4 @@
-import { Point2D } from './Point2D.js';
+import { Point2D } from './point2D.js';
 
 export class Triangle{
   a: Point2D;

@@ -5,7 +5,7 @@ import { Obj3D } from './Obj3D.js';
 //import { CvWireframe } from './CvWireFrame.js';
 import { CvHLines } from './CvHLines.js';
 import { Rota3D } from './Rota3D.js';
-import { Point3D } from './Point3D.js';
+import { Point3D } from './point3D.js';
 
 let canvas: HTMLCanvasElement;
 let graphics: CanvasRenderingContext2D;

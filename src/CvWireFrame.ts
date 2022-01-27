@@ -1,9 +1,9 @@
 import { Canvas3D } from './Canvas3D.js';
 import { Obj3D } from './Obj3D.js';
-import { Point2D } from './Point2D.js';
+import { Point2D } from './point2D.js';
 import { Dimension } from './Dimension.js';
 import { Polygon3D } from './Polygon3D.js';
-import { Point3D } from './Point3D.js';
+import { Point3D } from './point3D.js';
 
 export class CvWireframe{ // extends Canvas3D
   private maxX: number; maxY: number; centerX: number; centerY: number;

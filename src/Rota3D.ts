@@ -1,4 +1,4 @@
-import { Point3D } from './Point3D.js';
+import { Point3D } from './point3D.js';
 
 export class Rota3D{
   static r11: number; static r12: number; static r13: number;
