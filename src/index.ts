@@ -90,6 +90,48 @@ function pza1DerFunc() {
   cv.paint();	
 }
 
+function pza12MoveFunc(){
+  let af = -10;
+ 	
+	Rota3D.initRotate( obj.w[299], obj.w[300], af*Math.PI/180);	
+	
+  for (let i = 29; i <= 36; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();
+  let af2 = 10;
+ 	
+	Rota3D.initRotate( obj.w[301], obj.w[302], af2*Math.PI/180);	
+	
+  for (let i = 21; i <= 28; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();
+}
+
+function pza12MoveRetunFunc(){
+  let af = 10;
+ 	
+	Rota3D.initRotate( obj.w[299], obj.w[300], af*Math.PI/180);	
+	
+  for (let i = 29; i <= 36; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();
+  let af2 = -10;
+ 	
+	Rota3D.initRotate( obj.w[301], obj.w[302], af2*Math.PI/180);	
+	
+  for (let i = 21; i <= 28; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+	}
+	cv.setObj(obj);
+  cv.paint();
+}
+
 function pza1IzqFunc() {
   let af = -10;
  	
@@ -146,6 +188,8 @@ document.getElementById('pza1Izq').addEventListener('click', pza1IzqFunc, false)
 document.getElementById('pza1Der').addEventListener('click', pza1DerFunc, false);
 document.getElementById('pza12Izq').addEventListener('click', pza12IzqFunc, false);
 document.getElementById('pza12Der').addEventListener('click', pza12DerFunc, false);
+document.getElementById('pza12Move').addEventListener('click',pza12MoveFunc,false);
+document.getElementById('pza12MoveRe').addEventListener('click',pza12MoveRetunFunc,false);
 
 let Pix: number, Piy: number;
 let Pfx: number, Pfy: number;
