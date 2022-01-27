@@ -65,8 +65,8 @@ function decrDistFunc() {
 }
 function pza1DerFunc() {
     var af = 10;
-    Rota3D.initRotate(obj.w[139], obj.w[140], af * Math.PI / 180);
-    for (var i = 201; i <= 238; i++) {
+    Rota3D.initRotate(obj.w[301], obj.w[302], af * Math.PI / 180);
+    for (var i = 21; i <= 28; i++) {
         obj.w[i] = Rota3D.rotate(obj.w[i]);
     }
     cv.setObj(obj);
@@ -74,8 +74,8 @@ function pza1DerFunc() {
 }
 function pza1IzqFunc() {
     var af = -10;
-    Rota3D.initRotate(obj.w[139], obj.w[140], af * Math.PI / 180);
-    for (var i = 201; i <= 238; i++) {
+    Rota3D.initRotate(obj.w[301], obj.w[302], af * Math.PI / 180);
+    for (var i = 21; i <= 28; i++) {
         obj.w[i] = Rota3D.rotate(obj.w[i]);
     }
     cv.setObj(obj);

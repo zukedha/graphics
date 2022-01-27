@@ -81,9 +81,9 @@ function decrDistFunc() {
 function pza1DerFunc() {
   let af = 10;
  	
-	Rota3D.initRotate( obj.w[139], obj.w[140], af*Math.PI/180);	
+	Rota3D.initRotate( obj.w[301], obj.w[302], af*Math.PI/180);	
 	
-  for (let i = 201; i <= 238; i++){
+  for (let i = 21; i <= 28; i++){
     obj.w[i] = Rota3D.rotate(obj.w[i]);
 	}
 	cv.setObj(obj);
@@ -93,9 +93,9 @@ function pza1DerFunc() {
 function pza1IzqFunc() {
   let af = -10;
  	
-	Rota3D.initRotate( obj.w[139], obj.w[140], af*Math.PI/180);	
+	Rota3D.initRotate( obj.w[301], obj.w[302], af*Math.PI/180);	
 	
-  for (let i = 201; i <= 238; i++){
+  for (let i = 21; i <= 28; i++){
     obj.w[i] = Rota3D.rotate(obj.w[i]);
 	}
 	cv.setObj(obj);
