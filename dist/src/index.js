@@ -75,15 +75,21 @@ function pza1DerFunc() {
 function pza12MoveFunc() {
     var af = -10;
     Rota3D.initRotate(obj.w[299], obj.w[300], af * Math.PI / 180);
-    for (var i = 29; i <= 36; i++) {
-        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    for (var i_1 = 29; i_1 <= 36; i_1++) {
+        obj.w[i_1] = Rota3D.rotate(obj.w[i_1]);
     }
     cv.setObj(obj);
     cv.paint();
     var af2 = 10;
     Rota3D.initRotate(obj.w[301], obj.w[302], af2 * Math.PI / 180);
-    for (var i = 21; i <= 28; i++) {
-        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    for (var i_2 = 21; i_2 <= 28; i_2++) {
+        obj.w[i_2] = Rota3D.rotate(obj.w[i_2]);
+    }
+    cv.setObj(obj);
+    cv.paint();
+    var tr = -0.2;
+    for (var i = 13; i <= 20; i++) {
+        obj.w[i].x = obj.w[i].x + tr;
     }
     cv.setObj(obj);
     cv.paint();
@@ -91,15 +97,21 @@ function pza12MoveFunc() {
 function pza12MoveRetunFunc() {
     var af = 10;
     Rota3D.initRotate(obj.w[299], obj.w[300], af * Math.PI / 180);
-    for (var i = 29; i <= 36; i++) {
-        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    for (var i_3 = 29; i_3 <= 36; i_3++) {
+        obj.w[i_3] = Rota3D.rotate(obj.w[i_3]);
     }
     cv.setObj(obj);
     cv.paint();
     var af2 = -10;
     Rota3D.initRotate(obj.w[301], obj.w[302], af2 * Math.PI / 180);
-    for (var i = 21; i <= 28; i++) {
-        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    for (var i_4 = 21; i_4 <= 28; i_4++) {
+        obj.w[i_4] = Rota3D.rotate(obj.w[i_4]);
+    }
+    cv.setObj(obj);
+    cv.paint();
+    var tr = 0.2;
+    for (var i = 13; i <= 20; i++) {
+        obj.w[i].x = obj.w[i].x + tr;
     }
     cv.setObj(obj);
     cv.paint();

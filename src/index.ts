@@ -109,6 +109,13 @@ function pza12MoveFunc(){
 	}
 	cv.setObj(obj);
   cv.paint();
+
+  var tr = -0.2;
+  for(var i=13;i<=20; i++){
+    obj.w[i].x= obj.w[i].x+tr;
+  }
+  cv.setObj(obj);
+  cv.paint();
 }
 
 function pza12MoveRetunFunc(){
@@ -130,6 +137,14 @@ function pza12MoveRetunFunc(){
 	}
 	cv.setObj(obj);
   cv.paint();
+
+  var tr = 0.2;
+  for(var i=13;i<=20; i++){
+    obj.w[i].x= obj.w[i].x+tr;
+  }
+  cv.setObj(obj);
+  cv.paint();
+
 }
 
 function pza1IzqFunc() {
