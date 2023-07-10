@@ -1,8 +1,8 @@
 
-//import { Input } from './Input.js';
+import { Input } from './Input.js';
 import { Obj3D } from './Obj3D.js';
-//import { Canvas3D } from './Canvas3D.js';
-//import { CvWireframe } from './CvWireFrame.js';
+import { Canvas3D } from './Canvas3D.js';
+import { CvWireframe } from './CvWireFrame.js';
 import { CvHLines } from './CvHLines.js';
 import { Rota3D } from './Rota3D.js';
 import { Point3D } from './point3D.js';
@@ -12,6 +12,8 @@ let graphics: CanvasRenderingContext2D;
 
 canvas = <HTMLCanvasElement>document.getElementById('circlechart');
 graphics = canvas.getContext('2d');
+
+
 
 let cv: CvHLines;
 let obj: Obj3D;
@@ -94,10 +96,11 @@ function pza12MoveFunc(){
   let af = -10;
  	
 	Rota3D.initRotate( obj.w[299], obj.w[300], af*Math.PI/180);	
-	
+	if( af <= -30 ){
   for (let i = 29; i <= 36; i++){
     obj.w[i] = Rota3D.rotate(obj.w[i]);
 	}
+}
 	cv.setObj(obj);
   cv.paint();
   let af2 = 10;
@@ -119,6 +122,22 @@ function pza12MoveFunc(){
 
   var tr2 = -0.2;
   for(var i=40;i<=63; i++){
+    obj.w[i].x= obj.w[i].x+tr2;
+  }
+  cv.setObj(obj);
+  cv.paint();
+}
+
+function trayecto(){
+  var tr = 1;
+  for(var i=7; i<=8; i++){
+    obj.w[i].x= obj.w[i].x+tr;
+  }
+  cv.setObj(obj);
+  cv.paint();
+  var tr2 = 1;
+  
+  for(var i=13; i<=14; i++){
     obj.w[i].x= obj.w[i].x+tr2;
   }
   cv.setObj(obj);
@@ -203,6 +222,18 @@ function pza12IzqFunc() {
   cv.paint();	
 }
 
+function cerrarDedo(){
+  let  af = -10;
+  console.log(obj.w[9], obj.w[16]);
+  Rota3D.initRotate(obj.w[9], obj.w[16], af*Math.PI/180);
+  for(let i = 9; i <=  16; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+  }
+  for(let i = 49; i <=  56; i++){
+    obj.w[i] = Rota3D.rotate(obj.w[i]);
+  }
+}
+// opciones de vista
 document.getElementById('file-input').addEventListener('change', leerArchivo, false);
 document.getElementById('eyeDown').addEventListener('click', eyeDownFunc, false);
 document.getElementById('eyeUp').addEventListener('click', eyeUpFunc, false);
@@ -219,6 +250,8 @@ document.getElementById('pza12Izq').addEventListener('click', pza12IzqFunc, fals
 document.getElementById('pza12Der').addEventListener('click', pza12DerFunc, false);
 document.getElementById('pza12Move').addEventListener('click',pza12MoveFunc,false);
 document.getElementById('pza12MoveRe').addEventListener('click',pza12MoveRetunFunc,false);
+document.getElementById('Desplazamiento').addEventListener('click',trayecto,false);
+
 
 let Pix: number, Piy: number;
 let Pfx: number, Pfy: number;

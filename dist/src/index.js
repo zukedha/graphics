@@ -1,7 +1,4 @@
-//import { Input } from './Input.js';
 import { Obj3D } from './Obj3D.js';
-//import { Canvas3D } from './Canvas3D.js';
-//import { CvWireframe } from './CvWireFrame.js';
 import { CvHLines } from './CvHLines.js';
 import { Rota3D } from './Rota3D.js';
 var canvas;
@@ -100,6 +97,20 @@ function pza12MoveFunc() {
     cv.setObj(obj);
     cv.paint();
 }
+function trayecto() {
+    var tr = 1;
+    for (var i = 7; i <= 8; i++) {
+        obj.w[i].x = obj.w[i].x + tr;
+    }
+    cv.setObj(obj);
+    cv.paint();
+    var tr2 = 1;
+    for (var i = 13; i <= 14; i++) {
+        obj.w[i].x = obj.w[i].x + tr2;
+    }
+    cv.setObj(obj);
+    cv.paint();
+}
 function pza12MoveRetunFunc() {
     var af = 10;
     Rota3D.initRotate(obj.w[299], obj.w[300], af * Math.PI / 180);
@@ -163,6 +174,18 @@ function pza12IzqFunc() {
     cv.setObj(obj);
     cv.paint();
 }
+function cerrarDedo() {
+    var af = -10;
+    console.log(obj.w[9], obj.w[16]);
+    Rota3D.initRotate(obj.w[9], obj.w[16], af * Math.PI / 180);
+    for (var i = 9; i <= 16; i++) {
+        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    }
+    for (var i = 49; i <= 56; i++) {
+        obj.w[i] = Rota3D.rotate(obj.w[i]);
+    }
+}
+// opciones de vista
 document.getElementById('file-input').addEventListener('change', leerArchivo, false);
 document.getElementById('eyeDown').addEventListener('click', eyeDownFunc, false);
 document.getElementById('eyeUp').addEventListener('click', eyeUpFunc, false);
@@ -177,6 +200,7 @@ document.getElementById('pza12Izq').addEventListener('click', pza12IzqFunc, fals
 document.getElementById('pza12Der').addEventListener('click', pza12DerFunc, false);
 document.getElementById('pza12Move').addEventListener('click', pza12MoveFunc, false);
 document.getElementById('pza12MoveRe').addEventListener('click', pza12MoveRetunFunc, false);
+document.getElementById('Desplazamiento').addEventListener('click', trayecto, false);
 var Pix, Piy;
 var Pfx, Pfy;
 var theta = 0.3, phi = 1.3, SensibilidadX = 0.02, SensibilidadY = 0.02;
